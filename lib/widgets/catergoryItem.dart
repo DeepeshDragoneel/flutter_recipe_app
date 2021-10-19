@@ -1,17 +1,20 @@
 import "package:flutter/material.dart";
-import 'package:flutter_recipe_app/categoryAvailiableItems.dart';
+import 'package:flutter_recipe_app/screens/categoryAvailiableItems.dart';
 
 class CatergoryItem extends StatelessWidget {
   // const CatergoryItem({ Key? key }) : super(key: key);
+  final String id;
   final String title;
   final Color color;
 
-  CatergoryItem(this.title, this.color);
+  CatergoryItem(this.id, this.title, this.color);
 
   void SelectedCategory(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-      return CategoryAvailiableItems();
-    }));
+    // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+    //   return CategoryAvailiableItems();
+    // }));
+    Navigator.of(context).pushNamed('/availiableCategoryItems',
+        arguments: {'id': id, 'title': title});
   }
 
   @override

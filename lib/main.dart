@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_recipe_app/categoriesScreen.dart';
+import 'package:flutter_recipe_app/screens/categoriesScreen.dart';
+import 'package:flutter_recipe_app/screens/categoryAvailiableItems.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
         )
       ),
       home: CategoriesScreen(title: "Recipe App"),
+      routes: {
+        '/availiableCategoryItems': (context)=>CategoryAvailiableItems(),
+      },
     );
   }
 }
