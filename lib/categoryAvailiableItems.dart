@@ -6,6 +6,9 @@ class CategoryAvailiableItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Recipe App'),
+      ),
       body: Container(
         child: Text("Yp!"),
       ),

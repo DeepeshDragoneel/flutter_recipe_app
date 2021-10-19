@@ -18,18 +18,6 @@ class MyApp extends StatelessWidget {
     800: Color.fromRGBO(85, 246, 240, .9),
     900: Color.fromRGBO(85, 246, 240, 1),
   };
-  Map<int, Color> accentcolor = {
-    50: Color.fromRGBO(241, 227, 125, .1),
-    100: Color.fromRGBO(241, 227, 125, .2),
-    200: Color.fromRGBO(241, 227, 125, .3),
-    300: Color.fromRGBO(241, 227, 125, .4),
-    400: Color.fromRGBO(241, 227, 125, .5),
-    500: Color.fromRGBO(241, 227, 125, .6),
-    600: Color.fromRGBO(241, 227, 125, .7),
-    700: Color.fromRGBO(241, 227, 125, .8),
-    800: Color.fromRGBO(241, 227, 125, .9),
-    900: Color.fromRGBO(241, 227, 125, 1),
-  };
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
