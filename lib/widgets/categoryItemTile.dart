@@ -3,7 +3,7 @@ import 'package:flutter_recipe_app/models/meal.dart';
 
 class CategoryItemTile extends StatelessWidget {
   // const CategoryItemTile({ Key? key }) : super(key: key);
-
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -11,41 +11,39 @@ class CategoryItemTile extends StatelessWidget {
   final Affordability affordability;
 
   CategoryItemTile(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.imageUrl,
       required this.duration,
       required this.complexity,
       required this.affordability});
 
-  void showItemDetails() {}
+  void showItemDetails(BuildContext context) {
+    Navigator.of(context).pushNamed('/itemDetails', arguments: {'id': id, 'title': title});
+    // Navigator.of(context).pushNamed('/itemDetails',
+        
+  }
 
-  String get ComplexityText{
-    if(complexity == Complexity.Simple){
+  String get ComplexityText {
+    if (complexity == Complexity.Simple) {
       return 'Simple';
-    }
-    else if(complexity == Complexity.Hard){
+    } else if (complexity == Complexity.Hard) {
       return 'Hard';
-    }
-    else if(complexity == Complexity.Challenging){
+    } else if (complexity == Complexity.Challenging) {
       return 'Challenging';
-    }
-    else{
+    } else {
       return 'UnKnown!';
     }
   }
-  String get AffordabilityText{
-    if(affordability == Affordability.Affordable){
+
+  String get AffordabilityText {
+    if (affordability == Affordability.Affordable) {
       return "Affordable";
-    }
-    
-    else if(affordability == Affordability.Luxurious){
+    } else if (affordability == Affordability.Luxurious) {
       return "Luxurious";
-    }
-    
-    else if(affordability == Affordability.Pricey){
+    } else if (affordability == Affordability.Pricey) {
       return "Pricey";
-    }
-    else{
+    } else {
       return "Unknown!";
     }
   }
@@ -53,7 +51,7 @@ class CategoryItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => showItemDetails(),
+      onTap: () => showItemDetails(context),
       borderRadius: BorderRadius.circular(15),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -95,29 +93,35 @@ class CategoryItemTile extends StatelessWidget {
                 )
               ],
             ),
-          Container(
-            padding: EdgeInsets.all(20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Row(children: [
-                  Icon(Icons.schedule_outlined),
-                  SizedBox(width: 5),
-                  Text('${duration} min')
-                ],),
-                Row(children: [
-                  Icon(Icons.work_outline_sharp),
-                  SizedBox(width: 5),
-                  Text(ComplexityText)
-                ],),
-                Row(children: [
-                  Icon(Icons.monetization_on_outlined),
-                  SizedBox(width: 5),
-                  Text(AffordabilityText)
-                ],),
-              ],
-            )
-          )],
+            Container(
+                padding: EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.schedule_outlined),
+                        SizedBox(width: 5),
+                        Text('${duration} min')
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.work_outline_sharp),
+                        SizedBox(width: 5),
+                        Text(ComplexityText)
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.monetization_on_outlined),
+                        SizedBox(width: 5),
+                        Text(AffordabilityText)
+                      ],
+                    ),
+                  ],
+                ))
+          ],
         ),
       ),
     );

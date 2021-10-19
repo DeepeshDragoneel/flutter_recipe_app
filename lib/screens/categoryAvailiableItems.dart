@@ -25,6 +25,7 @@ class CategoryAvailiableItems extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, idx) {
           return CategoryItemTile(
+            id: availiableCategoryItems[idx].id,
             title: availiableCategoryItems[idx].title,
             imageUrl: availiableCategoryItems[idx].imageUrl,
             duration: availiableCategoryItems[idx].duration,

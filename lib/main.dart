@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_recipe_app/screens/categoriesScreen.dart';
 import 'package:flutter_recipe_app/screens/categoryAvailiableItems.dart';
+import 'package:flutter_recipe_app/screens/itemDetailsScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,27 +25,32 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Recipe App',
       theme: ThemeData(
-        primarySwatch: MaterialColor(0xFF2196F3, color),
-        accentColor: Color.fromRGBO(241, 227, 125, 1),
-        canvasColor: Color.fromRGBO(255, 254, 229, 1),
-        fontFamily: 'Raleway',
-        textTheme: ThemeData.light().textTheme.copyWith(
-          body1: TextStyle(
-            color: Color.fromRGBO(20, 51, 51, 1)
-          ),
-          body2: TextStyle(
-            color: Color.fromRGBO(20, 51, 51, 1)
-          ),
-          title: TextStyle(
-            fontSize: 24.5,
-            fontFamily: 'RobotoCondensed',
-            fontWeight: FontWeight.bold,
-          )
-        )
-      ),
+          primarySwatch: MaterialColor(0xFF2196F3, color),
+          accentColor: Color.fromRGBO(241, 227, 125, 1),
+          canvasColor: Color.fromRGBO(255, 254, 229, 1),
+          fontFamily: 'Raleway',
+          textTheme: ThemeData.light().textTheme.copyWith(
+              body1: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
+              body2: TextStyle(
+                  color: Color.fromRGBO(20, 51, 51, 1),
+                  fontWeight: FontWeight.bold),
+              title: TextStyle(
+                fontSize: 24.5,
+                fontFamily: 'RobotoCondensed',
+                fontWeight: FontWeight.bold,
+              ))),
       home: CategoriesScreen(title: "Recipe App"),
       routes: {
-        '/availiableCategoryItems': (context)=>CategoryAvailiableItems(),
+        '/availiableCategoryItems': (context) => CategoryAvailiableItems(),
+        '/itemDetails': (context) => ItemDetailsScreen(),
+      },
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(
+            builder: (context) => CategoriesScreen(title: "Recipe App"));
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+            builder: (context) => CategoriesScreen(title: "Recipe App"));
       },
     );
   }
