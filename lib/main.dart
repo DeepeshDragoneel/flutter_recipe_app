@@ -4,12 +4,49 @@ import 'package:flutter_recipe_app/screens/categoryAvailiableItems.dart';
 import 'package:flutter_recipe_app/screens/filterScreen.dart';
 import 'package:flutter_recipe_app/screens/footerTabScreen.dart';
 import 'package:flutter_recipe_app/screens/itemDetailsScreen.dart';
+import './data.dart';
+import './models/meal.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Map<String, bool> filters = {
+    'gluten': false,
+    'lactose': false,
+    'vegan': false,
+    'vegetarian': false,
+  };
+
+  List<Meal> availiableItems = MEALS_DATA;
+
+  void applyFilters(Map<String, bool> newFilters) {
+    setState(() {
+      filters = newFilters;
+      availiableItems = availiableItems.where((element) {
+        if (filters['gluten'] == true && !element.isGlutenFree) {
+          return false;
+        }
+        if (filters['lactose'] == true && !element.isLactoseFree) {
+          return false;
+        }
+        if (filters['vegan'] == true && !element.isVegan) {
+          return false;
+        }
+        if (filters['vegetarian'] == true && !element.isLactoseFree) {
+          return false;
+        }
+        return true;
+      }).toList();
+    });
+  }
+
   Map<int, Color> color = {
     50: Color.fromRGBO(85, 246, 240, .1),
     100: Color.fromRGBO(85, 246, 240, .2),
@@ -22,6 +59,7 @@ class MyApp extends StatelessWidget {
     800: Color.fromRGBO(85, 246, 240, .9),
     900: Color.fromRGBO(85, 246, 240, 1),
   };
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,9 +83,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => FooterTabScreen(),
-        '/availiableCategoryItems': (context) => CategoryAvailiableItems(),
+        '/availiableCategoryItems': (context) =>
+            CategoryAvailiableItems(availiableItems),
         '/itemDetails': (context) => ItemDetailsScreen(),
-        '/filters': (context) => FilterScreen(),
+        '/filters': (context) => FilterScreen(filters, applyFilters),
       },
       onGenerateRoute: (settings) {
         return MaterialPageRoute(

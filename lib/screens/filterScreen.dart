@@ -2,22 +2,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter_recipe_app/widgets/hamburgerItems.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({Key? key}) : super(key: key);
+  // const FilterScreen({Key? key}) : super(key: key);
+  final Map<String, bool> filters;
+  final Function applyFilters;
+
+  FilterScreen(this.filters, this.applyFilters);
 
   @override
   _FilterScreenState createState() => _FilterScreenState();
 }
 
 class _FilterScreenState extends State<FilterScreen> {
+  // Map<String, bool> filters = {
+  //   'gluten': false,
+  //   'lactose': false,
+  //   'vegan': false,
+  //   'vegetarian': false,
+  // };
+
   var isGlutenFree = false;
   var isLactoseFree = false;
   var isVegan = false;
   var isVegetarian = false;
 
+  initState() {
+    isGlutenFree = widget.filters['gluten'] as bool;
+    isLactoseFree = widget.filters['lactose'] as bool;
+    isVegan = widget.filters['vegan'] as bool;
+    isVegetarian = widget.filters['vegetarian'] as bool;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Filters')),
+        appBar: AppBar(
+          title: Text('Filters'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  final selectedFilters = {
+                    'gluten': isGlutenFree,
+                    'lactose': isLactoseFree,
+                    'vegan': isVegan,
+                    'vegetarian': isVegetarian,
+                  };
+                  widget.applyFilters(selectedFilters);
+                },
+                icon: Icon(Icons.save_alt))
+          ],
+        ),
         drawer: Drawer(child: HamburgerMenuItems()),
         body: Center(
           child: Column(

@@ -8,6 +8,9 @@ class CategoryAvailiableItems extends StatefulWidget {
 
   // CategoryAvailiableItems(this.CatagoryId, this.Categorytitle);
 
+  final List<Meal> availiableItems;
+  CategoryAvailiableItems(this.availiableItems);
+
   @override
   _CategoryAvailiableItemsState createState() =>
       _CategoryAvailiableItemsState();
@@ -39,7 +42,7 @@ class _CategoryAvailiableItemsState extends State<CategoryAvailiableItems> {
       final String catagoryId = routeArgs["id"]!;
       categorytitle = routeArgs["title"]!;
 
-      availiableCategoryItems = MEALS_DATA
+      availiableCategoryItems = widget.availiableItems
           .where((meal) => meal.categories.contains(catagoryId))
           .toList();
       loadedDataOnce = true;
