@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_recipe_app/screens/categoriesScreen.dart';
 import 'package:flutter_recipe_app/screens/categoryAvailiableItems.dart';
+import 'package:flutter_recipe_app/screens/filterScreen.dart';
+import 'package:flutter_recipe_app/screens/footerTabScreen.dart';
 import 'package:flutter_recipe_app/screens/itemDetailsScreen.dart';
 
 void main() {
@@ -39,10 +41,13 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'RobotoCondensed',
                 fontWeight: FontWeight.bold,
               ))),
-      home: CategoriesScreen(title: "Recipe App"),
+      // home: FooterTabScreen(),
+      initialRoute: '/',
       routes: {
+        '/': (context) => FooterTabScreen(),
         '/availiableCategoryItems': (context) => CategoryAvailiableItems(),
         '/itemDetails': (context) => ItemDetailsScreen(),
+        '/filters': (context) => FilterScreen(),
       },
       onGenerateRoute: (settings) {
         return MaterialPageRoute(
