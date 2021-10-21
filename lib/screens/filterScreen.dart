@@ -25,11 +25,15 @@ class _FilterScreenState extends State<FilterScreen> {
   var isVegan = false;
   var isVegetarian = false;
 
+  @override
   initState() {
+    print('Yo!');
+    print(widget.filters);
     isGlutenFree = widget.filters['gluten'] as bool;
     isLactoseFree = widget.filters['lactose'] as bool;
     isVegan = widget.filters['vegan'] as bool;
     isVegetarian = widget.filters['vegetarian'] as bool;
+    super.initState();
   }
 
   @override
@@ -47,6 +51,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     'vegetarian': isVegetarian,
                   };
                   widget.applyFilters(selectedFilters);
+                  Navigator.of(context).pushReplacementNamed('/');
                 },
                 icon: Icon(Icons.save_alt))
           ],
