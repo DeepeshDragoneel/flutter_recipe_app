@@ -9,24 +9,22 @@ class CategoryItemTile extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
-  final Function removeRecipe;
+  // final Function removeRecipe;
 
-  CategoryItemTile(
-      {required this.id,
-      required this.title,
-      required this.imageUrl,
-      required this.duration,
-      required this.complexity,
-      required this.affordability,
-      required this.removeRecipe});
+  CategoryItemTile({
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+    required this.duration,
+    required this.complexity,
+    required this.affordability,
+  });
 
   void showItemDetails(BuildContext context) {
     Navigator.of(context).pushNamed('/itemDetails', arguments: {
       'id': id,
       'title': title
-    }).then((value) => {
-          if (value != null) {removeRecipe(value)}
-        });
+    }).then((value) => {if (value != null) {}});
     // Navigator.of(context).pushNamed('/itemDetails',
   }
 

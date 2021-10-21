@@ -2,27 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_recipe_app/screens/categoriesScreen.dart';
 import 'package:flutter_recipe_app/screens/favoritesScreen.dart';
 import 'package:flutter_recipe_app/widgets/hamburgerItems.dart';
+import '../models/meal.dart';
 
 class FooterTabScreen extends StatefulWidget {
-  const FooterTabScreen({Key? key}) : super(key: key);
+  // const FooterTabScreen({Key? key}) : super(key: key);
+  final List<Meal> favoriteItems;
+  FooterTabScreen(this.favoriteItems);
 
   @override
   _FooterTabScreenState createState() => _FooterTabScreenState();
 }
 
 class _FooterTabScreenState extends State<FooterTabScreen> {
-  final List<Map<String, Object>> tabs = [
-    {
-      'title': 'Recipe App',
-      'widget': CategoriesScreen(
-        title: "Recipe App",
-      ),
-    },
-    {
-      'title': 'Favorites',
-      'widget': FavoritesScreen(),
-    }
-  ];
+  List<Map<String, Object>> tabs = [];
+
+  @override
+  initState() {
+    tabs = [
+      {
+        'title': 'Recipe App',
+        'widget': CategoriesScreen(
+          title: "Recipe App",
+        ),
+      },
+      {
+        'title': 'Favorites',
+        'widget': FavoritesScreen(widget.favoriteItems),
+      }
+    ];
+    super.initState();
+  }
 
   int selectedTab = 0;
 

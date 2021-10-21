@@ -71,7 +71,7 @@ class _CategoryAvailiableItemsState extends State<CategoryAvailiableItems> {
             duration: availiableCategoryItems[idx].duration,
             complexity: availiableCategoryItems[idx].complexity,
             affordability: availiableCategoryItems[idx].affordability,
-            removeRecipe: removeRecipe,
+            // removeRecipe: removeRecipe,
           );
         },
         itemCount: availiableCategoryItems.length,

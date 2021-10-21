@@ -26,6 +26,8 @@ class _MyAppState extends State<MyApp> {
 
   List<Meal> availiableItems = MEALS_DATA;
 
+  List<Meal> favoriteItems = [];
+
   void applyFilters(Map<String, bool> newFilters) {
     setState(() {
       filters = newFilters;
@@ -45,6 +47,25 @@ class _MyAppState extends State<MyApp> {
         return true;
       }).toList();
     });
+  }
+
+  void toogleFavorite(String recipeId) {
+    final idx = favoriteItems.indexWhere((element) => element.id == recipeId);
+
+    if (idx >= 0) {
+      setState(() {
+        favoriteItems.removeAt(idx);
+      });
+    } else {
+      setState(() {
+        favoriteItems
+            .add(MEALS_DATA.firstWhere((element) => element.id == recipeId));
+      });
+    }
+  }
+
+  bool isRecipeFav(String recipeId) {
+    return favoriteItems.any((element) => element.id == recipeId);
   }
 
   Map<int, Color> color = {
@@ -82,10 +103,10 @@ class _MyAppState extends State<MyApp> {
       // home: FooterTabScreen(),
       initialRoute: '/',
       routes: {
-        '/': (context) => FooterTabScreen(),
+        '/': (context) => FooterTabScreen(favoriteItems),
         '/availiableCategoryItems': (context) =>
             CategoryAvailiableItems(availiableItems),
-        '/itemDetails': (context) => ItemDetailsScreen(),
+        '/itemDetails': (context) => ItemDetailsScreen(toogleFavorite, isRecipeFav),
         '/filters': (context) => FilterScreen(filters, applyFilters),
       },
       onGenerateRoute: (settings) {

@@ -4,6 +4,9 @@ import 'package:flutter_recipe_app/data.dart';
 class ItemDetailsScreen extends StatelessWidget {
   // const ItemDetailsScreen({ Key? key }) : super(key: key);
 
+  final Function toogleFavorite;
+  final Function isRecipeFav;
+  ItemDetailsScreen(this.toogleFavorite, this.isRecipeFav);
   @override
   Widget build(BuildContext context) {
     final itemArgs =
@@ -97,9 +100,9 @@ class ItemDetailsScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: (){
-          Navigator.of(context).pop(id);
+        child: Icon(isRecipeFav(id) ? Icons.star : Icons.star_border),
+        onPressed: () {
+          toogleFavorite(id);
         },
       ),
     );
